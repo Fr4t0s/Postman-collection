@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "887effeb-362f-4566-898e-7cd039fe6fe3",
+		"name": "Agent app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25531508"
+	},
+	"item": [
+		{
+			"name": "Аутентификация",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.collectionVariables.set(\"token\", jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"qa@qa.qa\",\r\n    \"password\":\"111\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}{{api_version}}/users/obtain-token",
+					"host": [
+						"{{host}}{{api_version}}"
+					],
+					"path": [
+						"users",
+						"obtain-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создание водителя",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var driver = pm.response.json();\r",
+							"pm.collectionVariables.set(\"driver_id\", driver.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"first_name\": \"Сергей\",\r\n  \"last_name\": \"Истягин\",\r\n  \"patronymic\": \"Евгеньевич\",\r\n  \"birth_date\": \"1990-09-19\",\r\n  \"driving_experience_started\": \"2014-08-21\",\r\n  \"driver_licenses\": [\r\n    {\r\n      \"credential_type\": \"DRIVER_LICENSE\",\r\n      \"number\": \"569854\",\r\n      \"series\": \"6354\",\r\n      \"issue_date\": \"2018-06-25\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}{{api_version}}/insured_objects/drivers",
+					"host": [
+						"{{host}}{{api_version}}"
+					],
+					"path": [
+						"insured_objects",
+						"drivers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создание собственника",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var owner = pm.response.json();\r",
+							"pm.collectionVariables.set(\"owner_id\", owner.person);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"last_name\": \"Гурбановская\",\r\n  \"first_name\": \"Леся\",\r\n  \"patronymic\": \"Богдановна\",\r\n  \"birth_date\": \"1976-06-15\",\r\n  \"credential\": [\r\n    {\r\n      \"credential_type\": \"RUSSIAN_INTERNAL_PASSPORT\",\r\n      \"issue_date\": \"2017-03-08\",\r\n      \"issue_point\": \"УФМС РОССИИ ПО ТОМСКОЙ ОБЛАСТИ\",\r\n      \"issue_point_code\": \"700-002\",\r\n      \"number\": \"865497\",\r\n      \"series\": \"6919\"\r\n    }\r\n  ],\r\n  \"address\": [\r\n    {\r\n      \"address_query\": \"г Ульяновск, ул Архитекторов, д 7 к 32\",\r\n      \"address_type\": \"LEGAL_ADDRESS\",\r\n      \"region_kladr_id\": \"7000000000000\",\r\n      \"city_kladr_id\": \"7000000100000\"\r\n    },\r\n    {\r\n      \"address_query\": \"г Томск, ул Говорова, д 62 к 30\",\r\n      \"address_type\": \"ACTUAL_ADDRESS\",\r\n      \"region_kladr_id\": \"7000000000000\",\r\n      \"city_kladr_id\": \"7000000100000\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}{{api_version}}/insured_objects/owners/natural_persons",
+					"host": [
+						"{{host}}{{api_version}}"
+					],
+					"path": [
+						"insured_objects",
+						"owners",
+						"natural_persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создание страхователя",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var insurant = pm.response.json();\r",
+							"pm.collectionVariables.set(\"insurant_id\", insurant.person);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"last_name\": \"Гурбановская\",\r\n  \"first_name\": \"Леся\",\r\n  \"patronymic\": \"Богдановна\",\r\n  \"birth_date\": \"1976-06-15\",\r\n  \"credential\": [\r\n    {\r\n      \"credential_type\": \"RUSSIAN_INTERNAL_PASSPORT\",\r\n      \"issue_date\": \"2019-06-27\",\r\n      \"issue_point\": \"УФМС РОССИИ ПО ТОМСКОЙ ОБЛАСТИ\",\r\n      \"issue_point_code\": \"700-002\",\r\n      \"number\": \"865497\",\r\n      \"series\": \"6919\"\r\n    }\r\n  ],\r\n  \"address\": [\r\n    {\r\n      \"address_query\": \"г Томск, ул Говорова, д 62 к 30\",\r\n      \"address_type\": \"LEGAL_ADDRESS\",\r\n      \"region_kladr_id\": \"7000000000000\",\r\n      \"city_kladr_id\": \"7000000100000\"\r\n    },\r\n    {\r\n      \"address_query\": \"г Томск, ул Говорова, д 62 к 30\",\r\n      \"address_type\": \"ACTUAL_ADDRESS\",\r\n      \"region_kladr_id\": \"7000000000000\",\r\n      \"city_kladr_id\": \"7000000100000\"\r\n    }\r\n  ],\r\n   \"contact\": [\r\n        {\r\n            \"contact_type\": \"PHONE\",\r\n            \"data\": \"+79992061450\"\r\n        },\r\n        {\r\n            \"contact_type\": \"EMAIL\",\r\n            \"data\": \"natahodyr@yandex.ru\"\r\n        }\r\n   ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}{{api_version}}/insured_objects/insurants/natural_persons",
+					"host": [
+						"{{host}}{{api_version}}"
+					],
+					"path": [
+						"insured_objects",
+						"insurants",
+						"natural_persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создание автомобиля",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var car = pm.response.json();\r",
+							"pm.collectionVariables.set(\"car_id\", car.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"car_model_id\": 261020578, \r\n  \"engine_power\": 110,\r\n  \"vin_number\": \"SJNFCAE11U1230880\",\r\n  \"number_plate\": \"P617EC70\",\r\n  \"manufacturing_year\": 2007,\r\n  \"max_mass\": null,\r\n  \"has_trailer\": false,\r\n  \"credential\": [\r\n    {\r\n      \"credential_type\": \"VEHICLE_REGISTRATION\",\r\n      \"issue_date\": \"2010-11-01\",\r\n      \"number\": \"204326\",\r\n      \"series\": \"70PM\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}{{api_version}}/insured_objects/cars",
+					"host": [
+						"{{host}}{{api_version}}"
+					],
+					"path": [
+						"insured_objects",
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Объект страхования",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"drivers\": [\r\n        \"{{driver_id}}\"\r\n        ],\r\n    \"owner\": \"{{owner_id}}\",\r\n    \"car\": \"{{car_id}}\",\r\n    \"insurant\": \"{{insurant_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}{{api_version}}/insured_objects/",
+					"host": [
+						"{{host}}{{api_version}}"
+					],
+					"path": [
+						"insured_objects",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создание договора",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"valid_from\": \"2023-06-30\",\r\n  \"valid_to\": \"2024-06-29\",\r\n  \"insurance_period\": 8,\r\n  \"target_of_using\": 11,\r\n  \"drivers_ids\": [\"{{driver_id}}\"],\r\n  \"is_car_without_registration\": false,\r\n  \"engine_power\": 110,\r\n  \"has_car_trailer\": false,\r\n  \"car_type\": \"B\",\r\n  \"owner_registration\":   {\r\n      \"address_query\": \"г Томск, ул Говорова, д 62 к 30\",\r\n      \"address_type\": \"LEGAL_ADDRESS\",\r\n      \"region_kladr_id\": \"7000000000000\",\r\n      \"city_kladr_id\": \"7000000100000\"\r\n    },\r\n  \"periods\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}v3/agreements/calculations",
+					"host": [
+						"{{host}}v3"
+					],
+					"path": [
+						"agreements",
+						"calculations"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "api_version",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "driver_id",
+			"value": ""
+		},
+		{
+			"key": "owner_id",
+			"value": ""
+		},
+		{
+			"key": "insurant_id",
+			"value": ""
+		},
+		{
+			"key": "car_id",
+			"value": ""
+		}
+	]
+}

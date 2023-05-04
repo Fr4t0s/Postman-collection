@@ -1,0 +1,160 @@
+{
+	"info": {
+		"_postman_id": "a02f82f0-0fae-4516-8445-f9f36f84b95c",
+		"name": "Starwars",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25531508"
+	},
+	"item": [
+		{
+			"name": "Запрос по персонажу с id = 10",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Время ответа меньше 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"pm.test(\"Поле Cache-Control содержится в хедерах ответа\", function () {\r",
+							"    pm.response.to.have.header(\"Cache-Control\");\r",
+							"});\r",
+							"pm.test(\"Тело ответа содержит поле name\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"name\");\r",
+							"});\r",
+							"pm.test(\"Поле name id10 верно\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"Obi-Wan Kenobi\");\r",
+							"});\r",
+							"pm.test(\"Статус-код не равен 500\", function () {\r",
+							"    pm.response.to.not.status(500);\r",
+							"});\r",
+							"pm.test(\"Хотя бы один из кораблей верен\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.starships).to.include(\"https://swapi.py4e.com/api/starships/48/\", \"https://swapi.py4e.com/api/starships/59/\", \"https://swapi.py4e.com/api/starships/64/\", \"https://swapi.py4e.com/api/starships/65/\", \"https://swapi.py4e.com/api/starships/74/\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.py4e.com/api/people/10",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"py4e",
+						"com"
+					],
+					"path": [
+						"api",
+						"people",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Запрос за планетой c id = 7",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Время ответа меньше 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							"pm.test(\"Поле Allow содержится в хедерах ответа\", function () {\r",
+							"    pm.response.to.have.header(\"Allow\");\r",
+							"});\r",
+							"pm.test(\"Тело ответа содержит поле population\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"population\");\r",
+							"});\r",
+							"pm.test(\"Поле population верно\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.population).to.eql(\"1000000000\");\r",
+							"});\r",
+							"pm.test(\"Статус-код не равен 400\", function () {\r",
+							"    pm.response.to.not.status(400);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.py4e.com/api/planets/10",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"py4e",
+						"com"
+					],
+					"path": [
+						"api",
+						"planets",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Запрос за кораблём с id = 5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Время ответа меньше 350ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(350);\r",
+							"});\r",
+							"pm.test(\"Поле Date содержится в хедерах ответа\", function () {\r",
+							"    pm.response.to.have.header(\"Date\");\r",
+							"});\r",
+							"pm.test(\"Тело ответа содержит поле passengers\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"passengers\");\r",
+							"});\r",
+							"pm.test(\"Поле consumables верно\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.consumables).to.eql(\"1 month\");\r",
+							"});\r",
+							"pm.test(\"Статус-код не равен 300\", function () {\r",
+							"    pm.response.to.not.status(300);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.py4e.com/api/starships/5/",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"py4e",
+						"com"
+					],
+					"path": [
+						"api",
+						"starships",
+						"5",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "c81109de-c46a-465e-8b63-94111be952c7",
+		"name": "HeadHunter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25531508"
+	},
+	"item": [
+		{
+			"name": "Резюме с ключевым навыком \"тестирование пользовательского интерфейса\"",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.sendRequest(\"https://api.hh.ru/suggests/skill_set?text=тестирование пользовательского интерфейса\", function (err, response) {\r",
+							"var skill_test = response.json();\r",
+							"pm.collectionVariables.set(\"id_test\", skill_test.items[0].id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api.hh.ru/skills?id={{id_test}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"hh",
+						"ru"
+					],
+					"path": [
+						"skills"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{id_test}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Метро Новгорода",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.sendRequest(\"https://api.hh.ru/suggests/areas?text=нижний новгород\", function (err, response) {\r",
+							"var id_city = response.json();\r",
+							"pm.collectionVariables.set(\"id_novgorod\", id_city.items[0].id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api.hh.ru/metro/{{id_novgorod}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"hh",
+						"ru"
+					],
+					"path": [
+						"metro",
+						"{{id_novgorod}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Информация про QA Studio",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.sendRequest(\"https://api.hh.ru/employers?text=qa studio\", function (err, response) {\r",
+							"var employer_id = response.json();\r",
+							"pm.collectionVariables.set(\"qa_id\", employer_id.items[0].id);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api.hh.ru/employers/{{qa_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"hh",
+						"ru"
+					],
+					"path": [
+						"employers",
+						"{{qa_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Список языков",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "PHPSESSID=r2t5uvjq435r4q7ib3vtdjq120",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api.hh.ru/languages",
+					"protocol": "https",
+					"host": [
+						"api",
+						"hh",
+						"ru"
+					],
+					"path": [
+						"languages"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "id_test",
+			"value": ""
+		},
+		{
+			"key": "id_novgorod",
+			"value": ""
+		},
+		{
+			"key": "qa_id",
+			"value": ""
+		}
+	]
+}
